@@ -32,6 +32,7 @@ export class FontMetrics {
         body.appendChild(container);
 
         img.src = SMALL_IMAGE;
+        img.style.display = 'inline-block';
         img.width = 1;
         img.height = 1;
 
