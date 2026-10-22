@@ -13,10 +13,19 @@ jobs:
     name: Create version
     runs-on: ubuntu-latest
     steps:
+    - name: Create GitHub App token
+      id: app-token
+      uses: actions/create-github-app-token@v3
+      with:
+        app-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
+        owner: ${{ github.repository_owner }}
+        repositories: html2canvas
+        permission-contents: write
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-        token: ${{ secrets.PAT_TOKEN }}
+        token: ${{ steps.app-token.outputs.token }}
     - uses: actions/setup-node@v1
       with:
         node-version: 12
